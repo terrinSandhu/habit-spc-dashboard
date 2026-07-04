@@ -2,7 +2,7 @@
 
 Static GitHub Pages dashboard with:
 
-- PIN gate (`2002`, stored as a SHA-256 hash in `assets/app.js`)
+- PIN gate 
 - Daily habit/parameter entry
 - Meal entry: meal name, kCal, protein, fat, carbs
 - Meal rollups into Calories, Protein, Carbs, Fat
