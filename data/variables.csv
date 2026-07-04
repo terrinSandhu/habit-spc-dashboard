@@ -1,0 +1,32 @@
+variable_id,label,source_label,category,type,unit,goal_daily_avg,goal_sigma,lcl,ucl,higher_is_better,active,entry_source,required_for_score,spc_enabled,created_at,retired_at,notes
+sleep,Sleep,Sleep,Recovery,numeric,hr,8,0.75,6.5,9.5,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+gym,Gym,Gym,Fitness,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+jk,JK,Jk,Needs Review,numeric,count,0,0.25,0,0.5,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+caffeine,Caffeine,Caffeine,Nutrition,numeric,mg,40,4.0,32.0,48.0,FALSE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+read,Read,Read,Learning,minutes,min,20,5.0,10.0,30.0,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+linguistics,Linguistics,Linguistics,Learning,minutes,min,20,5.0,10.0,30.0,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+alcohol,Alcohol,Alc,Nutrition,numeric,drinks,0.5,0.25,0.0,1.0,FALSE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+walk,Walk,Walk,Fitness,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+steps,Steps,Steps,Fitness,count,steps,10000,1000.0,8000.0,12000.0,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+stretch,Stretch,Stretch,Fitness,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+eat,Eat,Eat,Nutrition,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+lift,Lift,Lift,Fitness,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+gluten,Gluten,Gluten,Nutrition,numeric,servings,0,0.25,0,0.5,FALSE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+cardio,Cardio,Cardio,Fitness,proportion,daily fraction,0.3,0.15,0,0.6,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+laundry,Laundry,Landry,Home/Admin,proportion,daily fraction,0.1,0.15,0,0.4,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+injection,Injection,Injection,Health,proportion,daily fraction,0.07,0.15,0,0.37,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+stiffness,Stiffness,Stiffness,Health,numeric,0-10,0,0.25,0,0.5,FALSE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+skincare,Skincare,Scincare,Health,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+make_bed,Make Bed,Make bed,Home/Admin,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+clean_bathroom,Clean Bathroom,Clean bathroom,Home/Admin,proportion,daily fraction,0.1,0.15,0,0.4,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+vacuum,Vacuum,Vaccum,Home/Admin,proportion,daily fraction,0.1,0.15,0,0.4,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+clean_surfaces,Clean Surfaces,Clean surfaces,Home/Admin,proportion,daily fraction,0.1,0.15,0,0.4,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+calories,Calories,Calories,Nutrition,kcal,kcal,2500,250.0,2000.0,3000.0,,TRUE,meal_rollup,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+protein,Protein,Protein,Nutrition,grams,g,210,21.0,168.0,252.0,,TRUE,meal_rollup,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+carbs,Carbs,Carbs,Nutrition,grams,g,260,26.0,208.0,312.0,,TRUE,meal_rollup,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+fat,Fat,Fat,Nutrition,grams,g,75,7.5,60.0,90.0,,TRUE,meal_rollup,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+cook,Cook,Cook,Nutrition,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+pack_lunch,Pack Lunch,Pakc Lunch,Nutrition,binary,yes/no,1,0.15,0.7,1,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+marie,Marie,Marie,Personal,proportion,daily fraction,0.5,0.15,0.2,0.8,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+sx,Sx,Sx,Personal,proportion,daily fraction,0.6,0.15,0.3,0.9,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
+social,Social,Social,Social,proportion,daily fraction,0.3,0.15,0,0.6,TRUE,TRUE,manual,TRUE,TRUE,2026-07-04,,Imported from spc-questions.xlsx; category/type auto-assigned.
