@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Personal SPC Dashboard</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script defer src="assets/github-sync.js"></script>
+  <script defer src="assets/charts.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <div id="pinGate" class="pin-gate">
+    <section class="pin-card" aria-label="PIN gate">
+      <div class="brand-mark">SPC</div>
+      <h1>Enter PIN</h1>
+      <p class="muted">Unlock your personal tracker.</p>
+      <input id="pinInput" inputmode="numeric" autocomplete="one-time-code" type="password" maxlength="8" placeholder="PIN" />
+      <button id="pinButton" class="primary wide">Unlock</button>
+      <p id="pinError" class="error-text" role="alert"></p>
+      <p class="fine-print">This is lightweight client-side protection for GitHub Pages.</p>
+    </section>
+  </div>
+
+  <main id="appShell" class="app-shell hidden">
+    <header class="topbar">
+      <div>
+        <h1>Personal SPC Dashboard</h1>
+        <p id="syncStatus" class="muted">Local app loaded.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="settingsToggle" class="secondary">GitHub Sync</button>
+        <button id="lockButton" class="secondary">Lock</button>
+      </div>
+    </header>
+
+    <section id="syncPanel" class="panel sync-panel hidden">
+      <div class="section-heading">
+        <div>
+          <h2>GitHub CSV Sync</h2>
+          <p class="muted">Paste a fine-grained token once on your own device. Nothing here is hard-coded into the repo.</p>
+        </div>
+      </div>
+      <div class="grid four">
+        <label>Owner
+          <input id="ghOwner" placeholder="tssandhu02" />
+        </label>
+        <label>Repo
+          <input id="ghRepo" placeholder="habit-spc-dashboard" />
+        </label>
+        <label>Branch
+          <input id="ghBranch" placeholder="main" />
+        </label>
+        <label>Data path
+          <input id="ghDataPath" placeholder="data" />
+        </label>
+      </div>
+      <label>GitHub token
+        <input id="ghToken" type="password" placeholder="github_pat_..." />
+      </label>
+      <div class="button-row">
+        <button id="saveGhSettings" class="secondary">Save settings locally</button>
+        <button id="loadGhData" class="secondary">Load CSVs from GitHub</button>
+        <button id="saveGhData" class="primary">Save CSVs to GitHub</button>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Main tabs">
+      <button class="tab-button active" data-tab="entryTab">Daily Entry</button>
+      <button class="tab-button" data-tab="mealTab">Meal Entry</button>
+      <button class="tab-button" data-tab="dashboardTab">Dashboard / SPC</button>
+      <button class="tab-button" data-tab="editTab">Edit Variables</button>
+    </nav>
+
+    <section id="entryTab" class="tab-panel active">
+      <div class="section-heading">
+        <div>
+          <h2>Daily Entry</h2>
+          <p class="muted">Manual habits and parameters from <code>variables.csv</code>. Meal-derived macros are entered on the Meal Entry tab.</p>
+        </div>
+        <button id="saveDailyEntry" class="primary">Save Daily Entry</button>
+      </div>
+
+      <div class="grid two">
+        <label>Date
+          <input id="entryDate" type="date" />
+        </label>
+        <label>Shared note
+          <input id="entryNote" placeholder="Optional note for this entry" />
+        </label>
+      </div>
+      <div id="dailyForm" class="entry-grid"></div>
+    </section>
+
+    <section id="mealTab" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <h2>Meal Entry</h2>
+          <p class="muted">Meals roll up into Calories, Protein, Carbs, and Fat SPC variables automatically.</p>
+        </div>
+        <button id="saveMeal" class="primary">Save Meal</button>
+      </div>
+
+      <div class="grid four">
+        <label>Date
+          <input id="mealDate" type="date" />
+        </label>
+        <label>Time
+          <input id="mealTime" type="time" />
+        </label>
+        <label>Meal name
+          <input id="mealName" placeholder="Chicken rice bowl" />
+        </label>
+        <label>kCal
+          <input id="mealKcal" type="number" min="0" step="1" placeholder="650" />
+        </label>
+        <label>Protein (g)
+          <input id="mealProtein" type="number" min="0" step="1" placeholder="55" />
+        </label>
+        <label>Fat (g)
+          <input id="mealFat" type="number" min="0" step="1" placeholder="18" />
+        </label>
+        <label>Carbs (g)
+          <input id="mealCarbs" type="number" min="0" step="1" placeholder="70" />
+        </label>
+        <label>Notes
+          <input id="mealNotes" placeholder="Optional" />
+        </label>
+      </div>
+
+      <div class="panel">
+        <h3>Meals for selected date</h3>
+        <div id="mealSummary" class="summary-grid"></div>
+        <div class="table-wrap">
+          <table id="mealsTable"></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboardTab" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <h2>Dashboard / SPC</h2>
+          <p class="muted">Charts use active variables, meal rollups, and current goal bands from <code>variables.csv</code>.</p>
+        </div>
+        <button id="refreshDashboard" class="secondary">Refresh charts</button>
+      </div>
+
+      <div class="grid three">
+        <label>Category filter
+          <select id="categoryFilter"></select>
+        </label>
+        <label>Variable
+          <select id="variableFilter"></select>
+        </label>
+        <label>Display mode
+          <select id="displayMode">
+            <option value="normalized">Normalized to goal</option>
+            <option value="raw">Raw values</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="chart-card">
+        <h3>Aggregate Habit Calendar</h3>
+        <div id="calendarChart" class="chart"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>SPC Chart</h3>
+        <div id="spcChart" class="chart"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Overlayed Trends</h3>
+        <div id="trendChart" class="chart"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Nutrition Trends</h3>
+        <div id="nutritionChart" class="chart"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Overlayed Histograms + Density Curves</h3>
+        <div id="histogramChart" class="chart"></div>
+      </div>
+
+      <div class="grid two">
+        <div class="chart-card">
+          <h3>Most Correlated Variables</h3>
+          <div class="table-wrap">
+            <table id="correlationTable"></table>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Recommendations</h3>
+          <div id="recommendations" class="recommendations"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="editTab" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <h2>Edit Variables / Spec Limits</h2>
+          <p class="muted">Edit <code>variables.csv</code> without deleting historical variables. Set <code>active=false</code> to retire a variable.</p>
+        </div>
+        <div class="button-row">
+          <button id="addVariable" class="secondary">Add Variable</button>
+          <button id="recomputeLimits" class="secondary">Recompute ±2σ Limits</button>
+          <button id="saveVariables" class="primary">Save Variables</button>
+        </div>
+      </div>
+
+      <div class="table-wrap wide">
+        <table id="variablesTable"></table>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+</body>
+</html>
